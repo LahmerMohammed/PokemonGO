@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  pokemon-go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pokemon-go-backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: pokemon-go-database
+    env_file:
+      - .env
+    ports:
+      - "1433:1433"
