@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import DatabaseConfigOptions from './database/database.config';
+import { SeederModule } from './database/seeders/seeder.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import DatabaseConfigOptions from './database/database.config';
       isGlobal: true,
       envFilePath: ['.env'],
     }),
+    SeederModule,
   ],
   controllers: [],
   providers: [],

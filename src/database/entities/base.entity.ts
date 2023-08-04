@@ -7,11 +7,11 @@ import {
 
 export abstract class BaseEntity extends Entity {
   @PrimaryGeneratedColumn('uuid')
-  id!: string;
+  id: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at!: Date;
+  @CreateDateColumn({ type: 'datetime' })
+  created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at!: Date;
+  @UpdateDateColumn({ type: 'datetime' })
+  updated_at: Date;
 }
