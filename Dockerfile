@@ -10,4 +10,4 @@ COPY . .
 
 COPY .env .
 
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "yarn", "run", "start:prod" ]
