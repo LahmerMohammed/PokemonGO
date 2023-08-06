@@ -16,7 +16,7 @@ class PokemonEntity extends BaseEntity {
   generation: number;
 
   @Column({ nullable: true })
-  evolutionStage: string | null;
+  evolutionStage!: string;
 
   @Column()
   hasEvolved: boolean;
@@ -34,13 +34,13 @@ class PokemonEntity extends BaseEntity {
   type1: string;
 
   @Column({ nullable: true })
-  type2: string | null;
+  type2!: string;
 
   @Column()
   weather1: string;
 
   @Column({ nullable: true })
-  weather2: string | null;
+  weather2!: string;
 
   @Column()
   totalStats: number;
