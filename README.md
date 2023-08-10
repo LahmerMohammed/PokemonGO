@@ -35,7 +35,7 @@ $ yarn install
 ### Running the Application
 To run the application, use the following command:
 ```sh
-npm run start:dev
+docker-compose up --build
 ```
 The server will start running on http://localhost:8080.
 
