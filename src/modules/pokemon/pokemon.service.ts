@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from 'src/constants';
-import PokemonEntity from 'src/database/entities/pokemon.entity';
-import { PaginatedResult } from 'src/shared/types';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../constants';
+import PokemonEntity from '../../database/entities/pokemon.entity';
+import { PaginatedResult } from '../../shared/types';
 import { Like, Repository } from 'typeorm';
 import { PokemonListQueryParams } from './dto';
 
@@ -17,16 +17,26 @@ export class PokemonService {
     query?: PokemonListQueryParams,
   ): Promise<PokemonEntity[] | PaginatedResult<PokemonEntity>> {
     const searchQuery = query?.q || '';
-    const findOptions: Record<string, number | Array<unknown>> = {
+    const findOptions: Record<string, number | Array<any>> = {
       where: [
         { name: Like(`%${searchQuery}%`) },
         { pokedexId: Like(`%${searchQuery}%`) },
-        query?.type && { type1: query?.type },
-        query?.type && { type2: query?.type },
-        query?.weather && { weather1: query?.weather },
-        query?.weather && { weather2: query?.weather },
       ],
     };
+
+    if (query?.type) {
+      (findOptions.where as Array<any>).push([
+        { type1: query.type },
+        { type2: query.type },
+      ]);
+    }
+
+    if (query?.weather) {
+      (findOptions.where as Array<any>).push([
+        { weather1: query.weather },
+        { weather2: query.weather },
+      ]);
+    }
 
     const pagination = query?.pagination;
     if (pagination) {
@@ -40,9 +50,9 @@ export class PokemonService {
       );
 
       return {
-        results,
         count,
-      };
+        results,
+      } as PaginatedResult<PokemonEntity>;
     }
 
     return await this.pokemonRepository.find(findOptions);
