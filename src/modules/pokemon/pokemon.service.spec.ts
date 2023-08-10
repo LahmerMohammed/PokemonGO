@@ -3,7 +3,7 @@ import { PokemonService } from './pokemon.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import PokemonEntity from '../../database/entities/pokemon.entity';
 import pokemonsStubs from './__mocks__/pokemons.stub';
-import { FindOptions, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { MockType, repositoryMockFactory } from './__mocks__/repository.mock';
 import { PokemonType, PokemonWeather } from './types';
 import { PaginatedResult } from 'src/shared/types';
